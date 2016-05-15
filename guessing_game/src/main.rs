@@ -1,9 +1,21 @@
+//!  # Guessing Game
+//!
+//! Guessing Game is a simple program where a secret number is generated and
+//! then a player is asked to try and guess that number.
+//!
+//! If their guess is too high, then they are told so and asked to guess again.
+//!
+//! If their guess is too low, then they are told so and asked to guess again.
+//!
+//! If their guess matches, they are congradulated and the program exits.
+
 extern crate rand;
 
 use std::io;
 use std::cmp::Ordering;
 use rand::Rng;
 
+/// Asks player to guess the number generated in range 0 to 100.
 fn main() {
     println!("Guess the number!");
 
@@ -16,19 +28,19 @@ fn main() {
 
         io::stdin().read_line(&mut guess).expect("Failed to read line");
         let guess: u32 = match guess.trim().parse() {
-            Ok(num)     => num,
-            Err(_)      => continue,
+            Ok(num) => num,
+            Err(_) => continue,
         };
 
         println!("You guessed: {}", guess);
 
         match guess.cmp(&secret_number) {
-            Ordering::Less      => println!("Too small!"),
-            Ordering::Greater   => println!("Too big!"),
-            Ordering::Equal     => {
+            Ordering::Less => println!("Too small!"),
+            Ordering::Greater => println!("Too big!"),
+            Ordering::Equal => {
                 println!("You win!");
                 break;
-            },
+            }
         }
     }
 }
